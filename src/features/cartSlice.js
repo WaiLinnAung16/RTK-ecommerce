@@ -47,9 +47,9 @@ export const cartSlice = createSlice({
           return item;
         }
       });
-      console.log(calculateTotalAmount(state.cartItems));
+
       state.quantity = calculateQuantity(state.cartItems);
-      state.totalAmount =  
+      Cookies.set(STORAGE_KEY, JSON.stringify(state.cartItems));
     },
     minusQuantity: (state, { payload }) => {
       if (payload.quantity === 1) {
