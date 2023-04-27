@@ -6,7 +6,7 @@ import { addToCart } from "../features/cartSlice";
 const Card = ({ product }) => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
+  // console.log(cartItems);
   return (
     <div className=" w-80 h-[360px] p-4 relative shadow flex flex-col rounded transition cursor-pointer hover:shadow-xl hover:shadow-info hover:scale-105">
       <div className=" self-center">

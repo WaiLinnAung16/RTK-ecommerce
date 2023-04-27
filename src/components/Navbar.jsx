@@ -17,14 +17,16 @@ const Navbar = () => {
           </div>
         </Link>
         <div className=" flex items-center gap-3">
-          <div className=" flex items-center gap-2 text-secondary bg-primary py-1 px-2 rounded shadow-sm">
-            <BsCart2 className=" text-2xl" />
-            <span className=" font-bold tracking-tighter">
-              {cartItems.length}
-            </span>
-          </div>
+          <Link to={"/add-to-cart"}>
+            <div className=" flex items-center gap-2 text-secondary bg-primary py-1 px-2 rounded shadow-sm">
+              <BsCart2 className=" text-2xl" />
+              <span className=" font-bold tracking-tighter">
+                {cartItems.length}
+              </span>
+            </div>
+          </Link>
 
-          <div className=" w-[150px] md:w-full flex items-center space-x-2 shadow-lg rounded-md p-2 bg-secondary hover:shadow-sm">
+          <div className=" w-[150px] md:w-full flex items-center space-x-2  rounded-md p-2 bg-secondary">
             <FaSearch className=" text-xl text-primary" />
             <input
               type="text"
