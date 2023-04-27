@@ -15,7 +15,7 @@ const calculateQuantity = (cartItems) => {
   return cartItems.reduce((total, item) => total + item.quantity, 0);
 };
 const calculateTotalAmount = (cartItems) => {
-  return cartItems.reduce((total, item) => total + item.price, 0);
+  return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 };
 
 if (storeItems) {
@@ -49,6 +49,7 @@ export const cartSlice = createSlice({
       });
 
       state.quantity = calculateQuantity(state.cartItems);
+      state.totalAmount = calculateTotalAmount(state.cartItems);
       Cookies.set(STORAGE_KEY, JSON.stringify(state.cartItems));
     },
     minusQuantity: (state, { payload }) => {
@@ -62,16 +63,18 @@ export const cartSlice = createSlice({
             return item;
           }
         });
-        state.quantity--;
-        state.totalAmount -= payload.price;
+        state.quantity = calculateQuantity(state.cartItems);
+      state.totalAmount = calculateTotalAmount(state.cartItems);
+      Cookies.set(STORAGE_KEY, JSON.stringify(state.cartItems));
       }
     },
     removeFromCart: (state, { payload }) => {
       state.cartItems = state.cartItems.filter(
         (item) => item.id !== payload.id
       );
-      state.quantity--;
-      state.totalAmount -= payload.price * payload.quantity;
+      state.quantity = calculateQuantity(state.cartItems);
+      state.totalAmount = calculateTotalAmount(state.cartItems);
+      Cookies.set(STORAGE_KEY, JSON.stringify(state.cartItems));
     },
   },
 });
